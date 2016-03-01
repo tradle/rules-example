@@ -6,7 +6,10 @@ const typeforce = require('typeforce')
 const express = require('express')
 const superagent = require('superagent')
 const request = require('superagent-promise')(superagent, Promise)
-const jsonParser = require('body-parser').json()
+const bodyParser = require('body-parser')
+// default limit is 100kb, which is not enough for receiving photos
+// 50mb is a bit ridiculous, but ok for testing
+const jsonParser = bodyParser.json({ limit: '50mb' })
 const constants = require('@tradle/constants')
 const CUR_HASH = constants.CUR_HASH
 const TYPE = constants.TYPE
@@ -43,7 +46,7 @@ providerPaths.forEach(providerPath => {
         // for all unverified forms in data.forms, and a product confirmation
         //
         // or you can create verifications yourself with sendVerification, and run approveProduct afterwards
-        log(`approving product ${data.productType} for ${data.customer}`)
+        log(`approving product ${data.productType} for customer ${data.customer}`)
         return approveProduct(providerPath, {
           customer: data.customer,
           productType: data.productType
