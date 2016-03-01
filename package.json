@@ -1,0 +1,21 @@
+{
+  "name": "rules-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mark Vayngrib <mark.vayngrib@lablz.com> (http://github.com/mvayngrib)",
+  "license": "ISC",
+  "dependencies": {
+    "@tradle/constants": "^2.0.1",
+    "bluebird": "^3.3.3",
+    "body-parser": "^1.15.0",
+    "debug": "^2.2.0",
+    "express": "^4.13.4",
+    "superagent": "^1.8.0-beta.2",
+    "superagent-promise": "^1.1.0",
+    "typeforce": "^1.6.2"
+  }
+}
