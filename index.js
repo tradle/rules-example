@@ -47,11 +47,15 @@ providerPaths.forEach(providerPath => {
         //
         // or you can create verifications yourself with sendVerification, and run approveProduct afterwards
         log(`approving product ${data.productType} for customer ${data.customer}`)
-        return approveProduct(providerPath, {
-          customer: data.customer,
-          productType: data.productType
+        return res.json({
+          approve: true
         })
-        .then(() => sendOK(res), next)
+
+        // return approveProduct(providerPath, {
+        //   customer: data.customer,
+        //   productType: data.productType
+        // })
+        // .then(() => sendOK(res), next)
       default:
         log(`unknown event: ${event}`)
         break
