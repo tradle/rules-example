@@ -4,8 +4,8 @@
 const Promise = require('bluebird')
 const typeforce = require('typeforce')
 const express = require('express')
-const superagent = require('superagent')
-const request = require('superagent-promise')(superagent, Promise)
+// const superagent = require('superagent')
+// const request = require('superagent-promise')(superagent, Promise)
 const bodyParser = require('body-parser')
 // default limit is 100kb, which is not enough for receiving photos
 // 50mb is a bit ridiculous, but ok for testing
@@ -74,32 +74,32 @@ function sendOK (res) {
   res.status(200).end()
 }
 
-function approveProduct (provider, opts) {
-  typeforce('String', provider)
-  typeforce({
-    customer: 'String',
-    productType: 'String'
-  }, opts, true)
+// function approveProduct (provider, opts) {
+//   typeforce('String', provider)
+//   typeforce({
+//     customer: 'String',
+//     productType: 'String'
+//   }, opts, true)
 
-  return post(opts, `${provider}/confirmation`)
-}
+//   return post(opts, `${provider}/confirmation`)
+// }
 
-function sendVerification (provider, opts) {
-  typeforce('String', provider)
-  typeforce({
-    verifiedItem: 'String'
-  }, opts, true)
+// function sendVerification (provider, opts) {
+//   typeforce('String', provider)
+//   typeforce({
+//     verifiedItem: 'String'
+//   }, opts, true)
 
-  return post(opts, `${provider}/verification`)
-}
+//   return post(opts, `${provider}/verification`)
+// }
 
-function post (body, path) {
-  return request
-    .post(`${TRADLE_SERVER_URL}/${path}`)
-    .send(body)
-    .set('Accept', 'application/json')
-    .end()
-}
+// function post (body, path) {
+//   return request
+//     .post(`${TRADLE_SERVER_URL}/${path}`)
+//     .send(body)
+//     .set('Accept', 'application/json')
+//     .end()
+// }
 
 function log () {
   return console.log.apply(console, arguments)
