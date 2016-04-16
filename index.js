@@ -14,14 +14,29 @@ const constants = require('@tradle/constants')
 const CUR_HASH = constants.CUR_HASH
 const TYPE = constants.TYPE
 const app = express()
-const port = Number(process.argv[2]) || 3000
+const argv = require('minimist')(process.argv.slice(2), {
+  default: {
+    port: 3000,
+    provider: ['cookie']
+  },
+  alias: {
+    p: 'port',
+    r: 'provider'
+  }
+})
+
+const providers = [].concat(argv.provider)
+typeforce(typeforce.arrayOf('String'), providers)
+
+const port = argv.port
 const server = app.listen(port)
-const providerPaths = ['cookie']
 const TRADLE_SERVER_URL = 'http://127.0.0.1:44444'
 
-providerPaths.forEach(providerPath => {
+providers.forEach(provider => {
+  const providerPath = `/${provider}`
+  console.log('waiting for events at ' + providerPath)
   // my webhook for Cookie bank was set to http://127.0.0.1/cookie
-  app.post(`/${providerPath}`, jsonParser, function (req, res, next) {
+  app.post(providerPath, jsonParser, function (req, res, next) {
     const event = req.body.event
     const data = req.body.data
     log(`received event: ${event}`)
